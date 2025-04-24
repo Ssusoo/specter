@@ -1,0 +1,37 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:test-data.sql
+
+server:
+  port: 8080
+
+logging:
+  level:
+    root: info
+    kr:
+      co:
+        szs:
+          task: debug
+    org:
+      hibernate:
+        type: off
+        SQL: off
+      springframework:
+        boot:
+          autoconfigure: error
+
+decorator:
+  datasource:
+    p6spy:
+      enable-logging: true #p6spylog 기능 활성화 옵션
+
+env:
+  aes-key: B422C9FF147251F15BB87C15F5753130
+  aes-iv: F0BD6CB94E747B88

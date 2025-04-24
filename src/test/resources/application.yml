@@ -1,0 +1,97 @@
+spring:
+  profiles:
+    active: test
+  web:
+    resources:
+      add-mappings: false
+  jpa:
+    open-in-view: false # https://docs.spring.io/spring-boot/appendix/application-properties/index.html#application-properties.data.spring.jpa.open-in-view
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        query:
+          plan_cache_max_size: 512 #https://medium.com/javarevisited/troubleshooting-and-fixing-outofmemoryerror-in-spring-boot-5cc559f556ea
+          plan_parameter_metadata_max_size: 32
+          in_clause_parameter_padding: true #https://docs.jboss.org/hibernate/orm/5.6/userguide/html_single/Hibernate_User_Guide.html#configurations-query
+        jdbc:
+          batch_size: 500
+          batch_versioned_data: true
+        order_inserts: true
+        order_updates: true
+        format_sql: true
+        default_batch_fetch_size: 500 #https://docs.jboss.org/hibernate/orm/5.6/userguide/html_single/Hibernate_User_Guide.html#configurations-database-fetch
+        batch_fetch_style: padded #https://docs.jboss.org/hibernate/orm/4.2/manual/en-US/html/ch20.html#performance-fetching-batch
+  jackson:
+    mapper:
+      allow-coercion-of-scalars: false #https://fasterxml.github.io/jackson-databind/javadoc/2.9/com/fasterxml/jackson/databind/MapperFeature.html#ALLOW_COERCION_OF_SCALARS
+    serialization:
+      fail-on-empty-beans: false #https://www.baeldung.com/jackson-jsonmappingexception
+  datasource:
+    hikari:
+      data-source-properties:
+        rewriteBatchedStatements: true
+      idle-timeout: 10000
+      connection-timeout: 10000
+      validation-timeout: 10000
+  data:
+    web:
+      pageable:
+        one-indexed-parameters: true
+        default-page-size: 15
+        max-page-size: 100
+        page-parameter: page
+        size-parameter: pageSize
+    redis:
+      repositories:
+        enabled: false
+    elasticsearch:
+      repositories:
+        enabled: false
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+server:
+  servlet:
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  error:
+    whitelabel.enabled: false
+  max-http-request-header-size: 10KB
+
+management:
+  health:
+    redis:
+      enabled: false
+  endpoint:
+    health:
+      enabled: true
+
+springdoc:
+  swagger-ui:
+    groups-order: ASC
+    operationsSorter: method
+    tagsSorter: alpha
+    path: /api-docs/swagger-ui
+  packages-to-scan: kr.co.szs.task.domains
+  paths-to-match: /v?/**
+  use-fqn: true
+  model-and-view-allowed: true
+  api-docs:
+    enabled: false
+
+logging:
+  level:
+    root: off
+
+decorator:
+  datasource:
+    p6spy:
+      enable-logging: false

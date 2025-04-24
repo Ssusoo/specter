@@ -1,0 +1,60 @@
+spring:
+  datasource:
+    master:
+      jdbc-url: jdbc:h2:mem:test
+      username: sa
+      driver-class-name: org.h2.Driver
+    slave: # local 환경이므로 master 와 동일하게 구성
+      jdbc-url: jdbc:h2:mem:test
+      username: sa
+      driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+  h2:
+    console: #h2-console
+      enabled: true
+      path: /h2-console
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            loggerLevel: full
+
+server:
+  port: 8080
+
+logging:
+  level:
+    root: info
+    kr:
+      co:
+        szs:
+          task: debug
+    org:
+      hibernate:
+        type: off
+        SQL: off
+      springframework:
+        boot:
+          autoconfigure: error
+
+springdoc:
+  api-docs:
+    enabled: true
+
+decorator:
+  datasource:
+    exclude-beans: dataSource, masterDataSource, slaveDataSource # master/slave routing을 위한 설정. dataSource를 등록하면 master/slave LB가 정상동작하고, slaveDataSource를 등록하면 이중로깅되지 않음
+    p6spy:
+      enable-logging: true #p6spylog 기능 활성화 옵션
+
+env:
+  aes-key: B422C9FF147251F15BB87C15F5753130
+  aes-iv: F0BD6CB94E747B88
