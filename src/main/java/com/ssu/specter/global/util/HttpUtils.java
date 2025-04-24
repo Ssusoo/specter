@@ -26,14 +26,29 @@ public class HttpUtils {
 
 	public static String getBearerJwtToken(HttpServletRequest request) {
 		String jwtToken = request.getHeader("Authorization");
+
 		if (org.springframework.util.StringUtils.hasText(jwtToken)) {
 			if (!jwtToken.startsWith("Bearer ")) {
 				throw new JwtTokenNotFoundException();
 			}
-			return jwtToken.substring(7);
-		} else {
-			return null;
+
+			// Bearer 접두사 제거 후 공백 제거
+			String token = jwtToken.substring(7).trim();
+
+			// 따옴표로 감싸져 있는 경우 제거
+			if (token.startsWith("\"") && token.endsWith("\"")) {
+				token = token.substring(1, token.length() - 1);
+			}
+
+			// 쉼표나 여분의 문자열이 포함될 경우 앞쪽만 추출
+			int commaIndex = token.indexOf(',');
+			if (commaIndex != -1) {
+				token = token.substring(0, commaIndex);
+			}
+
+			return token;
 		}
+		return null;
 	}
 
 	/**

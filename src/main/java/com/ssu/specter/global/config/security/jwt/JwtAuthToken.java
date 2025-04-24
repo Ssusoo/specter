@@ -22,7 +22,7 @@ public class JwtAuthToken implements AuthToken<Claims> {
 	private final String token;
 	private final Key key;
 
-	JwtAuthToken(String token, Key key) {
+	public JwtAuthToken(String token, Key key) {
 		this.token = token;
 		this.key = key;
 	}
