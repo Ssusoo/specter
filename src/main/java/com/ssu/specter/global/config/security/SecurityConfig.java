@@ -63,7 +63,7 @@ public class SecurityConfig {
 						authorize -> authorize
 								.requestMatchers(
 										"/specter/signup", "/specter/login", "/specter/renew-access-token",
-										"/api-docs/**", "/h2-console/**", "/v3/api-docs/**"
+										"/spctr/**", "/h2-console/**", "/v3/api-docs/**"
 								).permitAll()
 								.requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
 								.anyRequest().authenticated()

@@ -25,21 +25,16 @@ public class HttpUtils {
 	}
 
 	public static String getBearerJwtToken(HttpServletRequest request) {
-		String authHeader = request.getHeader("Authorization");
-
-		if (authHeader != null && authHeader.startsWith("Bearer ")) {
-			// "Bearer eyJ...","refreshToken":"... 처럼 잘못 붙은 경우를 대비
-			String token = authHeader.substring(7); // "Bearer " 제거
-
-			// 쌍따옴표, 쉼표, 콜론 이후 부분 제거
-			token = token.split("[\",:]")[0]; // 첫 번째 토큰만 사용
-
-			return token.trim();
+		String jwtToken = request.getHeader("Authorization");
+		if (org.springframework.util.StringUtils.hasText(jwtToken)) {
+			if (!jwtToken.startsWith("Bearer ")) {
+				throw new JwtTokenNotFoundException();
+			}
+			return jwtToken.substring(7);
+		} else {
+			return null;
 		}
-
-		throw new JwtTokenNotFoundException();
 	}
-
 
 	/**
 	 * Gets the ip addr.

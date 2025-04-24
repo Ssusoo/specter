@@ -39,7 +39,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws IOException, ServletException {
-		if (request.getRequestURI().startsWith("/actuator/") || request.getRequestURI().startsWith("/api-docs/swagger")) {
+		if (request.getRequestURI().startsWith("/actuator/") || request.getRequestURI().startsWith("/spctr/swagger")) {
 			filterChain.doFilter(request, response);
 		} else {
 			var requestWrapper = new ContentCachingRequestWrapper(request);

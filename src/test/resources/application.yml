@@ -80,7 +80,7 @@ springdoc:
     operationsSorter: method
     tagsSorter: alpha
     path: /api-docs/swagger-ui
-  packages-to-scan: kr.co.szs.task.domains
+  packages-to-scan: com.ssu.specter.domains
   paths-to-match: /v?/**
   use-fqn: true
   model-and-view-allowed: true
