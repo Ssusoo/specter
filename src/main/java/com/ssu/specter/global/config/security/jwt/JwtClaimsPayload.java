@@ -31,4 +31,8 @@ public class JwtClaimsPayload {
 		return getTokenPayload().map(JwtTokenPayload::userEmail)
 				.orElseThrow(JwtTokenNotFoundException::new);
 	}
+
+	public static boolean isPrivateInfoUser() {
+		return false;
+	}
 }

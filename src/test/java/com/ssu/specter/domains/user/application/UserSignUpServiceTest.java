@@ -2,7 +2,7 @@ package com.ssu.specter.domains.user.application;
 
 import com.ssu.specter.domains.user.domain.embed.UserRole;
 import com.ssu.specter.domains.user.dto.UserSignUpRequest;
-import com.ssu.specter.domains.user.exception.EmailAlreadyExistsException;
+import com.ssu.specter.domains.user.exception.EmailExistsException;
 import com.ssu.specter.domains.user.repository.UserRepository;
 import com.ssu.specter.test.MockTest;
 import org.junit.jupiter.api.BeforeEach;
@@ -56,7 +56,7 @@ class UserSignUpServiceTest extends MockTest {
 		given(userRepository.existsByUserEmail(anyString())).willReturn(true);
 
 		// when & then
-		assertThrows(EmailAlreadyExistsException.class,
+		assertThrows(EmailExistsException.class,
 				() -> userSignUpService.signUp(request));
 
 	}

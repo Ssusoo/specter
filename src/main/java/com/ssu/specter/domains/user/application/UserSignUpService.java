@@ -3,7 +3,7 @@ package com.ssu.specter.domains.user.application;
 import com.ssu.specter.domains.user.domain.User;
 import com.ssu.specter.domains.user.dto.UserSignUpRequest;
 import com.ssu.specter.domains.user.dto.payload.UserCreatePayload;
-import com.ssu.specter.domains.user.exception.EmailAlreadyExistsException;
+import com.ssu.specter.domains.user.exception.EmailExistsException;
 import com.ssu.specter.domains.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,7 +25,7 @@ public class UserSignUpService {
 	public void signUp(UserSignUpRequest request) {
 		// 이메일 중복 확인
 		if (userRepository.existsByUserEmail(request.userEmail())) {
-			throw new EmailAlreadyExistsException();
+			throw new EmailExistsException();
 		}
 
 		// 암호화 전 Payload 생성
