@@ -79,7 +79,7 @@ springdoc:
     groups-order: ASC
     operationsSorter: method
     tagsSorter: alpha
-    path: /api-docs/swagger-ui
+    path: /spctr/swagger.html
   packages-to-scan: com.ssu.specter.domains
   paths-to-match: /v?/**
   use-fqn: true

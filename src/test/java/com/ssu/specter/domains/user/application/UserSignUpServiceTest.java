@@ -50,7 +50,7 @@ class UserSignUpServiceTest extends MockTest {
 
 	@Test
 	@DisplayName("가입 처리 - 실패(중복 이메일)")
-	void signUp_fail_exists_email() {
+	void signUp_failure_exists_email() {
 		// given
 		var request = getUserSignUpRequest();
 		given(userRepository.existsByUserEmail(anyString())).willReturn(true);
