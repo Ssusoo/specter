@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import static com.ssu.specter.global.constant.CommonConstant.Yn.N;
+import static com.ssu.specter.global.constant.CommonConstant.Yn.Y;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
@@ -41,8 +43,8 @@ class MbtiCreateRequestTest {
 		// given
 		MbtiCreateRequest request = MbtiCreateRequest.builder()
 				.mbtiAnswerInfoList(List.of(
-						new MbtiCreateRequest.MbtiAnswerInfo(1L, "Y"),
-						new MbtiCreateRequest.MbtiAnswerInfo(2L, "N")
+						new MbtiCreateRequest.MbtiAnswerInfo(1L, Y),
+						new MbtiCreateRequest.MbtiAnswerInfo(2L, N)
 				))
 				.build();
 		Set<ConstraintViolation<MbtiCreateRequest>> validate = validator.validate(request);
@@ -54,7 +56,7 @@ class MbtiCreateRequestTest {
 
 	static Stream<Arguments> methodSource_parameterValidation_failure() {
 		return Stream.of(
-				arguments(null, "Y"), // 아이디 빈값
+				arguments(null, Y), // 아이디 빈값
 				arguments(1L, null) // 답변 빈값
 		);
 	}

@@ -13,6 +13,7 @@ import com.ssu.specter.domains.user.exception.UserRoleAccessDeniedException;
 import com.ssu.specter.domains.user.repository.UserRepository;
 import com.ssu.specter.global.config.security.jwt.JwtClaimsPayload;
 import com.ssu.specter.global.constant.ApiResponseCode;
+import com.ssu.specter.global.constant.CommonConstant;
 import com.ssu.specter.global.error.exception.DataNotFoundException;
 import com.ssu.specter.global.util.ConverterUtil;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import static com.ssu.specter.global.constant.CommonConstant.Type.RADIO;
+import static com.ssu.specter.global.constant.CommonConstant.Type.TEXTAREA;
+import static com.ssu.specter.global.constant.CommonConstant.Yn.N;
+import static com.ssu.specter.global.constant.CommonConstant.Yn.Y;
 
 @Slf4j
 @Service
@@ -67,8 +73,8 @@ public class MbtiQuestionCreateService {
 
 			var type = questionTypeMap.get(questionId);
 
-			if ("radio".equals(type)) {
-				if (!"Y".equals(answerValue) && !"N".equals(answerValue)) {
+			if (RADIO.equals(type)) {
+				if (!Y.equals(answerValue) && !N.equals(answerValue)) {
 					throw new MbtiAnswerCreateFailureException(
 							ApiResponseCode.MBTI_ANSWER_FAILURE,
 							"Y 또는 N만 입력 가능합니다. (설문지: " + questionId + "번)"
@@ -76,7 +82,7 @@ public class MbtiQuestionCreateService {
 				}
 			}
 
-			if ("textarea".equals(type)) {
+			if (TEXTAREA.equals(type)) {
 				if (answerValue == null || answerValue.trim().isEmpty()) {
 					throw new MbtiAnswerCreateFailureException(
 							ApiResponseCode.MBTI_ANSWER_FAILURE,

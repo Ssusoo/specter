@@ -7,7 +7,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "ssu_specter_usr_cert_hist")
+@Table(name = "SSU_SPECTER_USR_CERT_HIST")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
@@ -15,18 +15,18 @@ import java.time.LocalDateTime;
 public class UserCertificationHistory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "usr_cert_hist_serlno", nullable = false, updatable = false)
-	private Long userCertificationHistorySerialNo; // 사용자 인증 이력 일련번호
+	@Column(name = "USR_CERT_HIST_ID", nullable = false, updatable = false)
+	private Long userCertificationHistoryId; // 사용자 인증 이력
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "usr_id", nullable = false, updatable = false,
+	@JoinColumn(name = "USR_ID", nullable = false, updatable = false,
 			foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
 	private User user;
 
-	@Column(name = "cert_req_ip", length = 20, nullable = false, updatable = false)
+	@Column(name = "CERT_REQ_IP", length = 20, nullable = false, updatable = false)
 	private String certRequestIp; // 인증 요청 아이피
 
-	@Column(name = "cert_dtm", nullable = false, updatable = false)
+	@Column(name = "CERT_DTM", nullable = false, updatable = false)
 	private LocalDateTime certAt; // 인증 일시
 
 	/**

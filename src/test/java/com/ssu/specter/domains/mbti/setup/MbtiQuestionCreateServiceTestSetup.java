@@ -5,9 +5,11 @@ import com.ssu.specter.domains.mbti.dto.MbtiCreateRequest;
 import com.ssu.specter.domains.user.domain.User;
 import com.ssu.specter.domains.user.domain.embed.UserRole;
 
-import java.io.InputStream;
 import java.util.List;
 
+import static com.ssu.specter.global.constant.CommonConstant.Type.RADIO;
+import static com.ssu.specter.global.constant.CommonConstant.Type.TEXTAREA;
+import static com.ssu.specter.global.constant.CommonConstant.Yn.Y;
 import static java.util.stream.IntStream.rangeClosed;
 
 public class MbtiQuestionCreateServiceTestSetup {
@@ -16,7 +18,7 @@ public class MbtiQuestionCreateServiceTestSetup {
 		return MbtiQuestion.builder()
 				.questionId(1L)
 				.question("낯선 이들과 대화하는 것이 편안하신가요?")
-				.type("radio")
+				.type(RADIO)
 				;
 	}
 
@@ -47,7 +49,7 @@ public class MbtiQuestionCreateServiceTestSetup {
 		return rangeClosed(1, 20)
 				.mapToObj(i -> getMbtiQuestionBuilder()
 						.questionId((long) i)
-						.type(i <= 18 ? "radio" : "textarea")
+						.type(i <= 18 ? RADIO : TEXTAREA)
 						.build())
 				.toList();
 	}
@@ -59,7 +61,7 @@ public class MbtiQuestionCreateServiceTestSetup {
 		return questions.stream()
 				.map(q -> new MbtiCreateRequest.MbtiAnswerInfo(
 						q.getQuestionId(),
-						q.getType().equals("radio") ? "Y" : "텍스트 응답처리"))
+						q.getType().equals(RADIO) ? Y : "텍스트 응답처리"))
 				.toList();
 	}
 

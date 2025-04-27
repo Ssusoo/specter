@@ -1,0 +1,42 @@
+package com.ssu.specter.domains.mbti.setup;
+
+import com.ssu.specter.domains.mbti.domain.MbtiQuestion;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class MbtiQuestionDomainSetup {
+
+	public static List<MbtiQuestion> getMbtiQuestions() {
+		String[][] questions = {
+				{"낯선 이들과 대화하는 것이 편안하신가요?", "radio"},
+				{"체계적으로 일정을 관리하는 편인가요?", "radio"},
+				{"타인의 마음을 읽는 것이 능숙하신가요?", "radio"},
+				{"복잡한 과제를 해결하는 것을 선호하시나요?", "radio"},
+				{"독립적인 활동을 즐기시나요?", "radio"},
+				{"어려운 상황에서도 침착함을 유지하시나요?", "radio"},
+				{"창의적인 발상이 자주 떠오르나요?", "radio"},
+				{"팀 활동에 적극적으로 참여하시나요?", "radio"},
+				{"상황에 민감하게 반응하시나요?", "radio"},
+				{"이성적 판단을 중시하시나요?", "radio"},
+				{"꼼꼼하게 일처리를 하시나요?", "radio"},
+				{"봉사활동에 참여하는 것을 좋아하시나요?", "radio"},
+				{"모험을 시도하는 것이 즐거우신가요?", "radio"},
+				{"솔직하게 마음을 드러내시나요?", "radio"},
+				{"다양한 관점을 수용하시나요?", "radio"},
+				{"원하는 바를 이루기 위해 끈기 있게 도전하시나요?", "radio"},
+				{"평화로운 관계 유지를 중요하게 생각하시나요?", "radio"},
+				{"감정 조절이 가능한 편이신가요?", "radio"},
+				{"자신의 인간관계에서 가장 중요하게 생각하는 가치는 무엇인가요?", "textarea"},
+				{"직관적 판단이 도움이 되었던 경험을 설명해주세요.", "textarea"}
+		};
+
+		return Stream.of(questions)
+				.map(q -> MbtiQuestion.builder()
+						.question(q[0])
+						.type(q[1])
+						.build())
+				.collect(Collectors.toList());
+	}
+}

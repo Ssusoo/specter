@@ -3,6 +3,9 @@ package com.ssu.specter.domains.mbti.setup;
 import com.ssu.specter.domains.mbti.domain.MbtiQuestion;
 import com.ssu.specter.domains.user.domain.User;
 import com.ssu.specter.domains.user.domain.embed.UserRole;
+import com.ssu.specter.global.constant.CommonConstant;
+
+import static com.ssu.specter.global.constant.CommonConstant.Type.RADIO;
 
 public class MbtiQuestionFindServiceTestSetup {
 
@@ -10,7 +13,7 @@ public class MbtiQuestionFindServiceTestSetup {
 		return MbtiQuestion.builder()
 				.questionId(1L)
 				.question("낯선 이들과 대화하는 것이 편안하신가요?")
-				.type("radio")
+				.type(RADIO)
 				;
 	}
 

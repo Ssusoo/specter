@@ -1,4 +1,4 @@
-insert into ssu_mbti_qst (qst_nm, qst_type)
+insert into SSU_MBTI_QST (QST_NM, QST_TYPE)
 values ('낯선 이들과 대화하는 것이 편안하신가요?', 'radio'),
        ('체계적으로 일정을 관리하는 편인가요?', 'radio'),
        ('타인의 마음을 읽는 것이 능숙하신가요?', 'radio'),

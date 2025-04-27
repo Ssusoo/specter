@@ -10,13 +10,14 @@ import com.ssu.specter.global.util.ConverterUtil;
 import com.ssu.specter.test.config.TestProfile;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.IntStream;
+
+import static com.ssu.specter.global.constant.CommonConstant.Yn.Y;
 
 @Profile(TestProfile.TEST)
 @RequiredArgsConstructor
@@ -136,7 +137,7 @@ public class MbtiQuestionControllerTestSetup {
 		return IntStream.rangeClosed(1, 20)
 				.mapToObj(i -> new MbtiCreateRequest.MbtiAnswerInfo(
 						(long) i,
-						i <= 18 ? "Y" : "긴 텍스트 답변"
+						i <= 18 ? Y : "긴 텍스트 답변"
 				))
 				.toList();
 	}

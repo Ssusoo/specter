@@ -22,6 +22,9 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.ssu.specter.domains.mbti.setup.MbtiQuestionFindServiceTestSetup.*;
+import static com.ssu.specter.global.constant.CommonConstant.Type.RADIO;
+import static com.ssu.specter.global.constant.CommonConstant.Yn.N;
+import static com.ssu.specter.global.constant.CommonConstant.Yn.Y;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
@@ -57,7 +60,7 @@ class MbtiQuestionFindServiceTest extends MockTest {
 			assertNotNull(results);
 			assertEquals(1L, results.get(0).questionId());
 			assertEquals("낯선 이들과 대화하는 것이 편안하신가요?", results.get(0).question());
-			assertEquals("radio", results.get(0).type());
+			assertEquals(RADIO, results.get(0).type());
 		}
 	}
 
@@ -159,9 +162,9 @@ class MbtiQuestionFindServiceTest extends MockTest {
 			// Then
 			assertThat(result.answerId()).isEqualTo(1L);
 			assertThat(result.answerData().get(0).questionId()).isEqualTo(1L);
-			assertThat(result.answerData().get(0).answer()).isEqualTo("Y");
+			assertThat(result.answerData().get(0).answer()).isEqualTo(Y);
 			assertThat(result.answerData().get(1).questionId()).isEqualTo(2L);
-			assertThat(result.answerData().get(1).answer()).isEqualTo("N");
+			assertThat(result.answerData().get(1).answer()).isEqualTo(N);
 		}
 	}
 
